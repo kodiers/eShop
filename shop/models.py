@@ -25,7 +25,7 @@ class Price(models.Model):
     cost = models.IntegerField(default=0)
     price = models.IntegerField(default=0)
     sale = models.IntegerField(default=0)
-    good_title = models.ForeignKey(Goods)
+    #good_title = models.ForeignKey(Goods)
     modified = models.DateTimeField(default=datetime.datetime.now())
 
 class Goods(models.Model):
@@ -39,6 +39,7 @@ class Goods(models.Model):
 
     class Meta:
         ordering =['modified']
+        verbose_name_plural="Goods"
 
     def get_absolute_url(self):
         return "%s" % self.pk
@@ -62,7 +63,7 @@ class Orders(models.Model):
     #cost = quantity * goods.good_price
     date = models.DateTimeField(default=datetime.datetime.now())
 
-admin.site.register(CategoryGoods, GoodsCategoryAdmin)
+admin.site.register(CategoryGoods, CategoryGoodsAdmin)
 admin.site.register(Goods, GoodsAdmin)
 
 
