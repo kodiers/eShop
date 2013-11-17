@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <style type="text/css" media="screen">
+        body { margin: 15px; font-family: Arial; }
+        h1, h2 { background: #aaa; padding: 1% 2%; margin: 0; }
+        a { text-decoration: none; color: #444; }
+        .small { font-size: 75%; color: #777; }
+        #header { font-weight: bold; background: #ccc; padding: 1% 2%; }
+        #story-body { background: #ccc; padding: 2%; }
+        #story-list { background: #ccc; padding: 1% 1% 1% 4%; }
+        #story-list li { margin: .5em 0; }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <form action="{% url 'shop_search' %}" method="get">
+            <a href="{% url 'shop_home' %}">Home</a> &bull;
+            <label for="q">Search:</label><input type="text" name="q">
+            <input type="submit" value="Search">
+        </form>
+    </div>
+
+    <table border="1">
+        <tr>
+            <th>Menu</th>
+            <th></th>
+            <th>Your order</th>
+        </tr>
+        <tr>
+            <td>
+                <table>
+                    {% for page_category in page_categories %}
+                        <tr><td><li><a href="{% url 'page_category' page_category.slug %}">{{ page_category }}</a></li></td></tr>
+                    {% endfor %}
+                    {% for goods_category in goods_categories %}
+                        <tr><td><li><a href="{% url 'goods_category' goods_category.slug %}">{{ goods_category }}</a></li></td></tr>
+                    {% endfor %}
+                </table>
+            </td>
+            <td>
+                {% block content %}
+                {% endblock %}
+            </td>
+            <td>
+                <!-- TODO: insert basket script-->
+                <!--TODO: edit user login form -->
+                {% if user.is_authenticated %}
+                    You are logged in as {{ user.username }}
+                {% else %}
+                    {% csrf_token %}
+                    Username: {{ form.username }}
+                    Password: {{ form.password }}
+                {% endif %}
+            </td>
+        </tr>
+
+    </table>
+</body>
+</html>
