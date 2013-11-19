@@ -8,9 +8,9 @@
         a { text-decoration: none; color: #444; }
         .small { font-size: 75%; color: #777; }
         #header { font-weight: bold; background: #ccc; padding: 1% 2%; }
-        #story-body { background: #ccc; padding: 2%; }
-        #story-list { background: #ccc; padding: 1% 1% 1% 4%; }
-        #story-list li { margin: .5em 0; }
+        #goods-body { background: #ccc; padding: 2%; }
+        #goods-list { background: #ccc; padding: 1% 1% 1% 4%; }
+        #goods-list li { margin: .5em 0; }
     </style>
 </head>
 <body>
@@ -32,26 +32,29 @@
             <td>
                 <table>
                     {% for page_category in page_categories %}
-                        <tr><td><li><a href="{% url 'page_category' page_category.slug %}">{{ page_category }}</a></li></td></tr>
+                        <tr><td><ul><li><a href="{% url 'page_category' page_category.slug %}">{{ page_category }}</a></li></ul></td></tr>
                     {% endfor %}
                     {% for goods_category in goods_categories %}
-                        <tr><td><li><a href="{% url 'goods_category' goods_category.slug %}">{{ goods_category }}</a></li></td></tr>
+                        <tr><td><ul><li><a href="{% url 'goods_category' goods_category.slug %}">{{ goods_category }}</a></li></ul></td></tr>
                     {% endfor %}
                 </table>
             </td>
-            <td>
+            <td width="500">
                 {% block content %}
                 {% endblock %}
             </td>
-            <td>
+            <td width="200">
                 <!-- TODO: insert basket script-->
                 <!--TODO: edit user login form -->
                 {% if user.is_authenticated %}
-                    You are logged in as {{ user.username }}
+                    You are logged in as <a href=""> {{ user.username }}</a> <!--TODO: Insert link on user page-->
                 {% else %}
                     {% csrf_token %}
                     Username: {{ form.username }}
+                    <br>
                     Password: {{ form.password }}
+                    <br>
+                    or <a href="/register/">Register</a>
                 {% endif %}
             </td>
         </tr>
