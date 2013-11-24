@@ -50,7 +50,7 @@
                 {% if user.is_authenticated %}
                     You are logged in as <a href=""> {{ user.username }}</a> <!--TODO: Insert link on user page-->
                 {% else %}
-                    {% login_form %}
+                    <p>Please <a href="/login/">Log in!</a></p>
                 {% endif %}
             </td>
         </tr>

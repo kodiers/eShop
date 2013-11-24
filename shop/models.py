@@ -129,7 +129,7 @@ class Pages(models.Model):
     #@permalink
     def get_absolute_url(self):
         #return reverse("pages", (), {'slug':self.slug})
-        return {'slug':self.slug}
+        return self.slug
         #return "%s" % self.pk
 
 class PagesAdmin(admin.ModelAdmin):

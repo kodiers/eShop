@@ -9,6 +9,7 @@ from django.template import loader
 from django.core.context_processors import csrf
 from django.contrib.auth import login, logout, authenticate
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from shop.forms import *
 
 # Functions
@@ -31,9 +32,9 @@ def search(request):
     """Return list of goods, that contains searched string in title or in info fields."""
     if 'q' in request.GET:
         term = request.GET['q']
-        story_list = Goods.objects.filter(Q(title__contains=term )|Q(info__contains=term))
+        goods_list = Goods.objects.filter(Q(title__contains=term )|Q(info__contains=term))
         heading = "Search results"
-    return render_to_response("main.html", locals())
+    return render_to_response("main.html", locals(), context_instance=RequestContext(request))
 
 def login_form(request):
     """Handle logins"""
@@ -61,14 +62,21 @@ def page_category(request, slug):
     category = get_object_or_404(PageCategory, slug=slug)
     pages = Pages.objects.filter(category=category)
     heading = category.name
-    return render_to_response("list_pages.html", locals())
+    return render_to_response("list_pages.html", locals(), context_instance=RequestContext(request))
 
 def goods_category(request, slug):
     """Return list of goods in category"""
     category = get_object_or_404(CategoryGoods, slug=slug)
     goods = Goods.objects.filter(category=category)
     heading = category.title
-    return render_to_response("list_goods.html", locals())
+    return render_to_response("list_goods.html", locals(), context_instance=RequestContext(request))
+
+def pages_detail(request, page_category, slug):
+    pages = Pages.objects.get(slug=slug)
+    templ = loader.get_template('shop/pages_detail.html')
+    contex = RequestContext(request, {'pages':pages})
+    return HttpResponse(templ.render(contex))
+
 
 
 # Classes
@@ -78,3 +86,12 @@ class MainGoodsListView(ListView):
     template_name = "main.html"
     queryset = Goods.objects.filter(active=True)
     context_object_name = "goods_list"
+
+class PagesDetailView(DetailView):
+    """Show pages content"""
+    model = Pages
+    slug_field = 'slug'
+    template_name = 'shop/pages_detail.html'
+    def get_context_data(self, **kwargs):
+        context = super(PagesDetailView, self).get_context_data(**kwargs)
+        return context

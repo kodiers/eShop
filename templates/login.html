@@ -1,4 +1,6 @@
- <!-- TODO: insert basket script-->
+{% extends "base.html" %}
+{% block content %}
+<!-- TODO: insert basket script-->
 {# <!--TODO: Insert link on user page-->#}
     <form action="/login/" method="post">
     {% csrf_token %}
@@ -10,3 +12,4 @@
     </form>
     <br>
     or <a href="/register/">Register</a>
+{% endblock %}

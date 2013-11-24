@@ -3,7 +3,7 @@ from shop.models import *
 from django import template
 register = template.Library()
 
-@register.inclusion_tag("login.html")
+@register.inclusion_tag("login.html") # Not used in this version
 def login_form():
     form = AuthenticationForm()
     return {'form' : form}

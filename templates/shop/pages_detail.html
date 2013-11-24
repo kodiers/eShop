@@ -2,9 +2,11 @@
 {% block title %}{{ goods.title }}{% endblock %}
 {% block content %}
     <h1>{{ pages.title }}</h1>
-    <p><a href="{% url 'pages_category' pages.category.slug %}">{{ pages.category }}</a></p>
+    <p><a href="{% url 'page_category' pages.category.slug %}">{{ pages.category }}</a></p>
     <br>
     {{ pages.content }}
+    <br>
     <small>Author: {{ pages.owner }}</small>
+    <br>
     <small>Modified: {{ pages.modified }}</small>
 {% endblock %}

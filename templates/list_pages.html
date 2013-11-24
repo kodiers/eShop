@@ -5,7 +5,8 @@
 {% endif %}
     {% for page in pages %}
         {% if page.status == 1 %}
-            <a href="{{ page.get_absolute_url }}">{{ page.title }} {{ page.get_absolute_url }}</a><br>
+            <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>
+            <br>
         {% endif %}
     {% endfor %}
 {% endblock %}
