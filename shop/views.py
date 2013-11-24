@@ -72,12 +72,20 @@ def goods_category(request, slug):
     return render_to_response("list_goods.html", locals(), context_instance=RequestContext(request))
 
 def pages_detail(request, page_category, slug):
+    """Return detail of requested page"""
     pages = Pages.objects.get(slug=slug)
     templ = loader.get_template('shop/pages_detail.html')
     contex = RequestContext(request, {'pages':pages})
     return HttpResponse(templ.render(contex))
 
+def add_basket(request):
+    #TODO: do a basket view
+    if request.method == "POST":
+        good_partnumber = request.POST['partnumber']
 
+def create_order(request):
+    #TODO: do a create order
+    pass
 
 # Classes
 
@@ -87,7 +95,7 @@ class MainGoodsListView(ListView):
     queryset = Goods.objects.filter(active=True)
     context_object_name = "goods_list"
 
-class PagesDetailView(DetailView):
+class PagesDetailView(DetailView): #Not used in this version
     """Show pages content"""
     model = Pages
     slug_field = 'slug'

@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block title %}{{ goods.title }}{% endblock %}
 {% block content %}
+    <form action="/add_basket/" method="post">
+    {% csrf_token %}
     <h1>{{ goods.title }}</h1>
     <p><a href="{% url 'goods_category' goods.category.slug %}">{{ goods.category }}</a></p>
     <table>
@@ -25,4 +27,6 @@
         </td>
     </tr>
     </table>
+    <input type="submit" value="buy!">
+    </form>
 {% endblock %}
