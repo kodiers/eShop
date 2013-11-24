@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
+{% load inclusion_tags %}
 <head>
     <title>{% block title %}{% endblock %}</title>
     <style type="text/css" media="screen">
@@ -30,31 +31,26 @@
         </tr>
         <tr>
             <td>
-                <table>
-                    {% for page_category in page_categories %}
-                        <tr><td><ul><li><a href="{% url 'page_category' page_category.slug %}">{{ page_category }}</a></li></ul></td></tr>
-                    {% endfor %}
-                    {% for goods_category in goods_categories %}
-                        <tr><td><ul><li><a href="{% url 'goods_category' goods_category.slug %}">{{ goods_category }}</a></li></ul></td></tr>
-                    {% endfor %}
-                </table>
+{#                <table>#}
+{#                    {% for page_category in page_categories %}#}
+{#                        <tr><td><ul><li><a href="{% url 'page_category' page_category.slug %}">{{ page_category }}</a></li></ul></td></tr>#}
+{#                    {% endfor %}#}
+{#                    {% for goods_category in goods_categories %}#}
+{#                        <tr><td><ul><li><a href="{% url 'goods_category' goods_category.slug %}">{{ goods_category }}</a></li></ul></td></tr>#}
+{#                    {% endfor %}#}
+{#                </table>#}
+                {% menu %}
             </td>
             <td width="500">
                 {% block content %}
                 {% endblock %}
             </td>
             <td width="200">
-                <!-- TODO: insert basket script-->
-                <!--TODO: edit user login form -->
+{#                <!-- TODO: insert basket script-->#}
                 {% if user.is_authenticated %}
                     You are logged in as <a href=""> {{ user.username }}</a> <!--TODO: Insert link on user page-->
                 {% else %}
-                    {% csrf_token %}
-                    Username: {{ form.username }}
-                    <br>
-                    Password: {{ form.password }}
-                    <br>
-                    or <a href="/register/">Register</a>
+                    {% login_form %}
                 {% endif %}
             </td>
         </tr>

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{{ goods.title }}{% endblock %}
+{% block content %}
+    <h1>{{ pages.title }}</h1>
+    <p><a href="{% url 'pages_category' pages.category.slug %}">{{ pages.category }}</a></p>
+    <br>
+    {{ pages.content }}
+    <small>Author: {{ pages.owner }}</small>
+    <small>Modified: {{ pages.modified }}</small>
+{% endblock %}

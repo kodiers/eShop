@@ -1,0 +1,12 @@
+ <!-- TODO: insert basket script-->
+{# <!--TODO: Insert link on user page-->#}
+    <form action="/login/" method="post">
+    {% csrf_token %}
+    Username: {{ form.username }}
+    <br>
+    Password: {{ form.password }}
+    <br>
+    <input type="submit" value="Login!">
+    </form>
+    <br>
+    or <a href="/register/">Register</a>

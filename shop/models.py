@@ -7,6 +7,7 @@ import os
 import datetime
 from django.contrib.auth.models import User
 import funct
+from django.core.urlresolvers import reverse
 
 # Create your models here.
 class CategoryGoods(models.Model):
@@ -28,13 +29,15 @@ class CategoryGoodsAdmin(admin.ModelAdmin):
 class Goods(models.Model):
     """ Goods model"""
     title = models.CharField(max_length=100)
+    category = models.ForeignKey(CategoryGoods)
     partnumber = models.CharField(max_length=50)
     good_price = models.FloatField()
     quantity = models.IntegerField(default=0)
-    image = models.ImageField(upload_to='img')
+    image = models.ImageField(upload_to='img/')
     info = models.TextField(max_length=400, blank=True)
     active = models.BooleanField(default=True)
     modified = models.DateTimeField(default=datetime.datetime.now())
+
 
     class Meta:
         ordering =['modified']
@@ -43,12 +46,9 @@ class Goods(models.Model):
     def get_absolute_url(self):
         return "%s" % self.pk
 
-class GoodsImageInline(admin.StackedInline):
-    model = Goods
 
 class GoodsAdmin(admin.ModelAdmin):
     """Goods admin model"""
-    inlines = [GoodsImageInline]
     list_display = ('partnumber', 'title', 'good_price', 'quantity', 'active', 'modified')
     list_filter = ('title', 'good_price', 'quantity', 'active', 'modified')
     search_fields = ('partnumber', 'title', 'info', 'good_price')
@@ -126,9 +126,11 @@ class Pages(models.Model):
     class Meta:
         verbose_name_plural = "Pages"
 
-    @permalink
+    #@permalink
     def get_absolute_url(self):
-        return ("pages", (), {'slug':self.slug})
+        #return reverse("pages", (), {'slug':self.slug})
+        return {'slug':self.slug}
+        #return "%s" % self.pk
 
 class PagesAdmin(admin.ModelAdmin):
     list_display = ('title', 'owner', 'status', 'created', 'modified')

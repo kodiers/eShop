@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{ goods.title }}{% endblock %}
+{% block content %}
+    <h1>{{ goods.title }}</h1>
+    <p><a href="{% url 'goods_category' goods.category.slug %}">{{ goods.category }}</a></p>
+    <table>
+    <tr>
+        <th>Partnumber</th>
+        <th>About</th>
+        <th>Quantity</th>
+        <th>Price</th>
+    </tr>
+    <tr>
+        <td>{{ goods.partnumber }}</td>
+        <td>
+            <img src="{{ goods.image.url }}"/>
+            <br>
+            {{ goods.info }}
+        </td>
+        <td>
+            <input type="number" value="1">
+        </td>
+        <td>
+            {{ goods.price }}
+        </td>
+    </tr>
+    </table>
+{% endblock %}

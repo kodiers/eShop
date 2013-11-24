@@ -1,0 +1,8 @@
+<table>
+    {% for page_category in page_categories %}
+        <tr><td><ul><li><a href="{% url 'page_category' page_category.slug %}">{{ page_category }}</a></li></ul></td></tr>
+    {% endfor %}
+    {% for goods_category in goods_categories %}
+        <tr><td><ul><li><a href="{% url 'goods_category' goods_category.slug %}">{{ goods_category }}</a></li></ul></td></tr>
+    {% endfor %}
+</table>

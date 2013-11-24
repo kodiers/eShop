@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+{% if heading %}
+    <h1>{{ heading }}</h1>
+{% endif %}
+    {% for good in goods %}
+        <a href="{{ good.get_absolute_url }}">{{ good.title }}</a><br>
+    {% endfor %}
+{% endblock %}

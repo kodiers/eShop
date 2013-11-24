@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+{% if heading %}
+    <h1>{{ heading }}</h1>
+{% endif %}
+    {% for page in pages %}
+        {% if page.status == 1 %}
+            <a href="{{ page.get_absolute_url }}">{{ page.title }} {{ page.get_absolute_url }}</a><br>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
