@@ -1,7 +1,7 @@
 # Create your views here.
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404, RequestContext, render
 from django.db.models import Q
-from models import Goods, CategoryGoods, Pages, PageCategory, Orders, OrderItem
+from models import Goods, CategoryGoods, Pages, PageCategory, Orders, OrderItem, Basket
 from django.http import HttpResponse, HttpResponseRedirect
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -11,6 +11,9 @@ from django.contrib.auth import login, logout, authenticate
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from shop.forms import *
+import random
+import uuid
+from django.core.urlresolvers import reverse
 
 # Functions
 
@@ -79,9 +82,41 @@ def pages_detail(request, page_category, slug):
     return HttpResponse(templ.render(contex))
 
 def add_basket(request):
-    #TODO: do a basket view
-    if request.method == "POST":
-        good_partnumber = request.POST['partnumber']
+    #Basket view( can change and delete items in basket
+    if request.method == 'POST':
+        if 'del' in request.POST:
+            basket_del = Basket.objects.get(pk=int(request.POST['b_pk']))
+            basket_del.delete()
+        elif 'save' in request.POST:
+            basket_plus = Basket.objects.get(pk=int(request.POST['b_pk']))
+            basket_plus.quantity = int(request.POST['quant'])
+            basket_plus.sum_total = basket_plus.quantity * basket_plus.price
+            basket_plus.save()
+        else:
+            good = Goods.objects.get(pk=int(request.POST['pk']))
+            basket = Basket()
+            if request.user.is_authenticated():
+                basket.user = request.user
+            basket.basket_id = request.session.session_key
+            basket.item = good.title
+            basket.partnumber = good.partnumber
+            basket.price = good.good_price
+            basket.quantity = int(request.POST['quantity'])
+            basket.order_number = random.randint(1, 1000000000)
+            basket.sum_total = basket.quantity * basket.price
+            basket.save()
+        baskets = Basket.objects.filter(basket_id = request.session.session_key)
+        summ = 0
+        for bas in baskets:
+            summ += bas.sum_total
+        templ = loader.get_template("add_basket.html")
+        context = RequestContext(request, {'baskets':baskets, 'summ':summ})
+        return HttpResponse(templ.render(context))
+    else:
+        templ = loader.get_template("errors.html")
+        error = "Get request! o.O"
+        context = RequestContext(request, {'error':error})
+        return HttpResponse(templ.render(context))
 
 def create_order(request):
     #TODO: do a create order
@@ -94,6 +129,7 @@ class MainGoodsListView(ListView):
     template_name = "main.html"
     queryset = Goods.objects.filter(active=True)
     context_object_name = "goods_list"
+    paginate_by = 15
 
 class PagesDetailView(DetailView): #Not used in this version
     """Show pages content"""
@@ -103,3 +139,7 @@ class PagesDetailView(DetailView): #Not used in this version
     def get_context_data(self, **kwargs):
         context = super(PagesDetailView, self).get_context_data(**kwargs)
         return context
+
+
+class GoodsDetailView(DetailView):
+    model = Goods

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+     <table>
+        <tr>
+            <th>Partnumber</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+        {% for basket in baskets %}
+        <tr>
+            <td>{{ basket.partnumber }}
+            </td>
+            <td>{{ basket.item }}</td>
+            <td>{{ basket.price }}</td>
+            <td>
+                <form action="." method="post">
+                    {% csrf_token %}
+                    <input type="number" value="{{ basket.quantity }}" name="quant">
+                    <input type="hidden" name="b_pk" value="{{ basket.pk }}">
+                    <input type="submit" value="Save" name="save">
+                </form>
+            </td>
+            <td>{{ basket.sum_total }}</td>
+            <td>
+                <form action="." method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="b_pk" value="{{ basket.pk }}">
+                    <input type="submit" value="Delete" name="del">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td>Summary: {{ summ }}</td>
+        </tr>
+        <td></td>
+    </table>
+    <br>
+    <a href="{% url 'shop_home' %}"><h3>Continue to buy!!!</h3></a>
+{% endblock %}

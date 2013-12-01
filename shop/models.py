@@ -56,6 +56,7 @@ class GoodsAdmin(admin.ModelAdmin):
 
 class OrderItem(models.Model):
     """Order item model"""
+    order_id = models.IntegerField()
     goods = models.CharField(max_length=100) # Goods title
     partnumber = models.CharField(max_length=50)
     unit_price = models.FloatField()
@@ -69,6 +70,7 @@ class Orders(models.Model):
         (1, 'In Progress'),
         (2, 'Complete'),
     )
+    order_id = models.CharField(max_length=256)
     owner = models.ForeignKey(User)
     items = models.ManyToManyField(OrderItem, related_name="+")
     total_cost = models.FloatField()
@@ -137,6 +139,27 @@ class PagesAdmin(admin.ModelAdmin):
     search_fields = ('title', 'content')
     list_filter = ('owner', 'status', 'created', 'modified')
     prepopulated_fields = {'slug':('title',)}
+
+class Basket(models.Model):
+    '''Basket model'''
+    ORDER_STATUS = (
+        (0, 'Received'),
+        (1, 'In Progress'),
+        (2, 'Complete'),
+    )
+    user = models.ForeignKey(User, null=True, blank=True)
+    basket_id = models.CharField(max_length=2048) # session key
+    item = models.CharField(max_length=100) #Goods title
+    partnumber = models.CharField(max_length=50)
+    price = models.FloatField()
+    quantity = models.IntegerField()
+    sum_total = models.FloatField()
+    created = models.DateTimeField(default=datetime.datetime.now(), null=True)
+    modified = models.DateTimeField(default=None, null=True)
+    comments = models.CharField(max_length=300, null=True, default=None)
+    status = models.CharField(choices=ORDER_STATUS, default=0, max_length=12)
+    order_number = models.IntegerField(null=True)
+
 
 admin.site.register(CategoryGoods, CategoryGoodsAdmin)
 admin.site.register(Goods, GoodsAdmin)
