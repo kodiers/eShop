@@ -37,6 +37,7 @@ def search(request):
         term = request.GET['q']
         goods_list = Goods.objects.filter(Q(title__contains=term )|Q(info__contains=term))
         heading = "Search results"
+        #MainGoodsListView.as_view(queryset=Goods.objects.filter(Q(title__contains=term )|Q(info__contains=term)))
     return render_to_response("main.html", locals(), context_instance=RequestContext(request))
 
 def login_form(request):
@@ -82,7 +83,7 @@ def pages_detail(request, page_category, slug):
     return HttpResponse(templ.render(contex))
 
 def add_basket(request):
-    #Basket view( can change and delete items in basket
+    #Basket view( can change and delete items in basket)
     if request.method == 'POST':
         if 'del' in request.POST:
             basket_del = Basket.objects.get(pk=int(request.POST['b_pk']))
@@ -97,6 +98,8 @@ def add_basket(request):
             basket = Basket()
             if request.user.is_authenticated():
                 basket.user = request.user
+            if not request.session.exists(request.session.session_key):
+                request.session.create()
             basket.basket_id = request.session.session_key
             basket.item = good.title
             basket.partnumber = good.partnumber
@@ -118,9 +121,43 @@ def add_basket(request):
         context = RequestContext(request, {'error':error})
         return HttpResponse(templ.render(context))
 
-def create_order(request):
+def add_order(request):
     #TODO: do a create order
-    pass
+    if request.method == 'POST':
+        if 'payment_type' in request.POST:
+            if request.POST['payment_type'] == 'card':
+                summ = request.POST['total']
+                template = loader.get_template("add_order.html")
+                context = RequestContext(request, {'summary': summ})
+                return HttpResponse(template.render(context))
+        elif 'order' in request.POST:
+            baskets = Basket.objects.filter(basket_id=request.session.session_key)
+            orderitems = OrderItem()
+            order = Orders()
+            for basket in baskets:
+                orderitems.order_sess = basket.basket_id
+                orderitems.goods = basket.item
+                orderitems.quantity = basket.quantity
+                orderitems.total_price_per_goods = basket.sum_total
+                orderitems.order_id = basket.order_number
+                orderitems.partnumber = basket.partnumber
+                orderitems.save()
+            if request.user.is_authenticated():
+                order.owner = request.user
+            order.total_cost = float(request.POST['total'])
+            order.address = request.POST['address']
+            order.comments = request.POST['comments']
+            order.billing_card = request.POST['billing_card']
+            order.billing_number = request.POST['billing_number']
+            order.billing_name = request.POST['billing_name']
+            order.billing_date_mm = request.POST['billing_date_mm']
+            order.billing_date_yy = request.POST['billing_date_yy']
+            order.billing_cvv = request.POST['billing_cvv']
+            order.save()
+            template = loader.get_template("order_success.html")
+            context = RequestContext(request, {'order_id': order.pk})
+            return HttpResponse(template.render(context))
+
 
 # Classes
 

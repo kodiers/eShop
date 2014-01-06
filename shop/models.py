@@ -38,7 +38,6 @@ class Goods(models.Model):
     active = models.BooleanField(default=True)
     modified = models.DateTimeField(default=datetime.datetime.now())
 
-
     class Meta:
         ordering =['modified']
         verbose_name_plural="Goods"
@@ -57,9 +56,10 @@ class GoodsAdmin(admin.ModelAdmin):
 class OrderItem(models.Model):
     """Order item model"""
     order_id = models.IntegerField()
+    order_sess = models.CharField(max_length=2048) # session key
     goods = models.CharField(max_length=100) # Goods title
     partnumber = models.CharField(max_length=50)
-    unit_price = models.FloatField()
+    #unit_price = models.FloatField()
     quantity = models.IntegerField()
     total_price_per_goods = models.FloatField()
 
@@ -70,14 +70,30 @@ class Orders(models.Model):
         (1, 'In Progress'),
         (2, 'Complete'),
     )
+    CARDS = (
+        (0, 'Visa'),
+        (1, 'MasterCard'),
+        (2, 'American Express'),
+    )
     order_id = models.CharField(max_length=256)
-    owner = models.ForeignKey(User)
+    owner = models.ForeignKey(User, null=True, blank=True)
     items = models.ManyToManyField(OrderItem, related_name="+")
     total_cost = models.FloatField()
     date_created = models.DateTimeField(default=datetime.datetime.now())
     date_modified = models.DateTimeField(default=datetime.datetime.now())
-    date_closed = models.DateTimeField(blank=True)
+    date_closed = models.DateTimeField(blank=True, null=True)
     status = models.CharField(choices=ORDER_STATUS, default=0, max_length=12)
+    address =  models.CharField(max_length=512)
+    # ====Card info====
+    billing_name = models.CharField(max_length=256)
+    billing_card = models.CharField(choices=CARDS, default=0, max_length=20, blank=True) #Card name
+    billing_number = models.CharField(max_length=48, blank=True) #Card number
+    billing_cvv = models.CharField(max_length=5, blank=True) #CVV/CVV2
+    billing_date_mm = models.IntegerField(max_length=2, blank=True) # Month, then card will be expired
+    billing_date_yy = models.IntegerField(max_length=2, blank=True) # Year, then card will be expired
+    # ====end card info====
+    billing_info = models.CharField(max_length=512, blank=True) # Other billing info( like bank info or etc.)
+    comments = models.CharField(max_length=512, blank=True)
 
     class Meta:
         verbose_name_plural="Orders"
@@ -128,11 +144,8 @@ class Pages(models.Model):
     class Meta:
         verbose_name_plural = "Pages"
 
-    #@permalink
     def get_absolute_url(self):
-        #return reverse("pages", (), {'slug':self.slug})
         return self.slug
-        #return "%s" % self.pk
 
 class PagesAdmin(admin.ModelAdmin):
     list_display = ('title', 'owner', 'status', 'created', 'modified')

@@ -17,7 +17,7 @@
             <td>
                 <form action="." method="post">
                     {% csrf_token %}
-                    <input type="number" value="{{ basket.quantity }}" name="quant">
+                    <input type="number" value="{{ basket.quantity }}" name="quant" pattern="^[0-9]+$">
                     <input type="hidden" name="b_pk" value="{{ basket.pk }}">
                     <input type="submit" value="Save" name="save">
                 </form>
@@ -39,4 +39,11 @@
     </table>
     <br>
     <a href="{% url 'shop_home' %}"><h3>Continue to buy!!!</h3></a>
+    <form method="post" action="{% url 'add_order' %}">
+    {% csrf_token %}
+        <input type="radio" name="payment_type" value="card"> Pay by card!<br>
+        <input type="radio" name="payment_type" value="check"> Request a check!<br>
+        <input type="hidden" name="total" value="{{ summ }}">
+        <input type="submit" value="Cash out">
+    </form>
 {% endblock %}

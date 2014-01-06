@@ -1,7 +1,7 @@
 __author__ = 'kodiers'
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from shop.models import Basket, Goods
+from shop.models import Basket, Goods, Orders
 from django import forms
 
 class MyUserCreationForm(UserCreationForm):
@@ -14,3 +14,8 @@ class MyUserCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'first_name', 'last_name')
+
+class OrderForm(forms.Form):
+    class Meta:
+        model = Orders
+        fields = ('billing_card')

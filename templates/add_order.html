@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>
+    Your order is: {{ summary }}
+</h1>
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="total" value="{{ summary }}">
+    <br>
+    <h2>Billing info</h2>
+    <input type="radio" name="billing_card" value="Visa">Visa<br>
+    <input type="radio" name="billing_card" value="MasterCard">MasterCard<br>
+    <input type="radio" name="billing_card" value="American Express">American Express<br>
+    Card number:<br>
+    <input type="text" name="billing_number">
+    <br>
+    Billing name:<br>
+    {% if user.is_authenticated %}
+        <input type="text" name="billing_name" value="{{ user.username }}">
+    {% else %}
+        <input type="text" name="billing_name">
+    {% endif %}
+    <br>
+    CVV:
+    <br>
+    <input type="number" name="billing_cvv">
+    <br>
+    Expiration date:<br>
+    MM:<input type="number" name="billing_date_mm"> / YY:<input type="number" name="billing_date_yy">
+    <br>
+    <h2>Shipping info:</h2>
+    Ship to:<input type="text" name="address"><br>
+    Comments:<input type="text" name="comments"><br>
+    <input type="submit" value="Confirm!" name="order">
+</form>
+{% endblock %}
