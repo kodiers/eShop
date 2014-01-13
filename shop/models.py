@@ -52,20 +52,9 @@ class GoodsAdmin(admin.ModelAdmin):
     list_filter = ('title', 'good_price', 'quantity', 'active', 'modified')
     search_fields = ('partnumber', 'title', 'info', 'good_price')
 
-
-class OrderItem(models.Model):
-    """Order item model"""
-    order_id = models.IntegerField()
-    order_sess = models.CharField(max_length=2048) # session key
-    goods = models.CharField(max_length=100) # Goods title
-    partnumber = models.CharField(max_length=50)
-    #unit_price = models.FloatField()
-    quantity = models.IntegerField()
-    total_price_per_goods = models.FloatField()
-
 class Orders(models.Model):
     """Orders model"""
-    ORDER_STATUS = (
+    STATUS = (
         (0, 'Received'),
         (1, 'In Progress'),
         (2, 'Complete'),
@@ -77,16 +66,16 @@ class Orders(models.Model):
     )
     order_id = models.CharField(max_length=256)
     owner = models.ForeignKey(User, null=True, blank=True)
-    items = models.ManyToManyField(OrderItem, related_name="+")
+    #items = models.ManyToManyField(OrderItem, related_name="+")
     total_cost = models.FloatField()
     date_created = models.DateTimeField(default=datetime.datetime.now())
     date_modified = models.DateTimeField(default=datetime.datetime.now())
     date_closed = models.DateTimeField(blank=True, null=True)
-    status = models.CharField(choices=ORDER_STATUS, default=0, max_length=12)
+    status = models.IntegerField(choices=STATUS, default=0)
     address =  models.CharField(max_length=512)
     # ====Card info====
     billing_name = models.CharField(max_length=256)
-    billing_card = models.CharField(choices=CARDS, default=0, max_length=20, blank=True) #Card name
+    billing_card = models.IntegerField(choices=CARDS, default=0) #Card name
     billing_number = models.CharField(max_length=48, blank=True) #Card number
     billing_cvv = models.CharField(max_length=5, blank=True) #CVV/CVV2
     billing_date_mm = models.IntegerField(max_length=2, blank=True) # Month, then card will be expired
@@ -99,11 +88,27 @@ class Orders(models.Model):
         verbose_name_plural="Orders"
         ordering = ['-date_created']
 
+class OrderItem(models.Model):
+    """Order item model"""
+    order_id = models.ForeignKey(Orders)
+    order_sess = models.CharField(max_length=2048) # session key
+    goods = models.CharField(max_length=100) # Goods title
+    partnumber = models.CharField(max_length=50)
+    #unit_price = models.FloatField()
+    quantity = models.IntegerField()
+    total_price_per_goods = models.FloatField()
+
+class OrderItemInline(admin.TabularInline):
+    model = OrderItem
 
 class OrdersAdmin(admin.ModelAdmin):
-    list_display = ('id', 'owner', 'total_cost', 'date_created', 'date_modified', 'date_closed', 'status')
+    list_display = ('id', 'owner', 'total_cost', 'status', 'date_created', 'date_modified', 'date_closed')
     list_filter = ('id', 'owner', 'total_cost', 'date_created', 'date_modified', 'date_closed', 'status')
+    readonly_fields = ('owner', 'total_cost', 'date_created', 'billing_name', 'billing_card', 'billing_number',
+        'billing_date_mm', 'billing_date_yy', 'billing_info', 'comments')
+    exclude = ('billing_cvv', )
     search_fields = ('owner', 'goods', 'quantity', 'cost')
+    inlines = [OrderItemInline]
 
 class PriceList(models.Model):
     name = models.CharField(max_length=255)

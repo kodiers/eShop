@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8188bcad-0f13-4831-b01e-65e60c890a86" name="Default" comment="verbose_plural_name in model Goods added">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/add_order.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/order_success.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/shop.db" afterPath="$PROJECT_DIR$/database/shop.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/add_basket.html" afterPath="$PROJECT_DIR$/templates/add_basket.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shop/forms.py" afterPath="$PROJECT_DIR$/shop/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/add_order.html" afterPath="$PROJECT_DIR$/templates/add_order.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shop/models.py" afterPath="$PROJECT_DIR$/shop/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eShop/settings.py" afterPath="$PROJECT_DIR$/eShop/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/reg_succes.html" afterPath="$PROJECT_DIR$/templates/reg_succes.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eShop/urls.py" afterPath="$PROJECT_DIR$/eShop/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shop/views.py" afterPath="$PROJECT_DIR$/shop/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="eShop.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,25 +33,18 @@
       <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shop/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="152" column="39" selection-start="6816" selection-end="6816" vertical-scroll-proportion="0.0" vertical-offset="1746" max-vertical-offset="2595">
-              <folding />
+            <state line="163" column="33" selection-start="7268" selection-end="7268" vertical-scroll-proportion="0.0" vertical-offset="2211" max-vertical-offset="2910">
+              <folding>
+                <element signature="e#26#133#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="order_success.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/order_success.html">
+      <file leaf-file-name="reg_succes.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/reg_succes.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="11" selection-start="112" selection-end="112" vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="135">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add_order.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/add_order.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="49" selection-start="905" selection-end="905" vertical-scroll-proportion="-12.5" vertical-offset="120" max-vertical-offset="615">
+            <state line="4" column="11" selection-start="167" selection-end="167" vertical-scroll-proportion="0.15384616" vertical-offset="0" max-vertical-offset="390">
               <folding />
             </state>
           </provider>
@@ -70,22 +59,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="errors.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/errors.html">
+      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shop/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="180">
-              <folding />
+            <state line="108" column="30" selection-start="4163" selection-end="4163" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2910">
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/shop/models.py">
+      <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shop/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="140" column="39" selection-start="5043" selection-end="5043" vertical-scroll-proportion="0.6376812" vertical-offset="1836" max-vertical-offset="2835">
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-              </folding>
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -97,6 +86,15 @@
               <folding>
                 <element signature="e#23#77#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="funct.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shop/funct.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="885">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -122,8 +120,10 @@
       <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eShop/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="67" selection-start="790" selection-end="790" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="600">
-              <folding />
+            <state line="22" column="60" selection-start="927" selection-end="927" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="645">
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -152,7 +152,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/templates/register.html" />
         <option value="$PROJECT_DIR$/shop/templatetags/inclusion_tags.py" />
         <option value="$PROJECT_DIR$/templates/shop/pages_detail.html" />
         <option value="$PROJECT_DIR$/templates/errors.html" />
@@ -160,14 +159,15 @@
         <option value="$PROJECT_DIR$/templates/main.html" />
         <option value="$PROJECT_DIR$/eShop/settings.py" />
         <option value="$PROJECT_DIR$/templates/list_pages.html" />
-        <option value="$PROJECT_DIR$/eShop/urls.py" />
         <option value="$PROJECT_DIR$/templates/shop/goods_detail.html" />
         <option value="$PROJECT_DIR$/templates/add_basket.html" />
         <option value="$PROJECT_DIR$/shop/forms.py" />
         <option value="$PROJECT_DIR$/templates/order_success.html" />
-        <option value="$PROJECT_DIR$/shop/views.py" />
         <option value="$PROJECT_DIR$/templates/add_order.html" />
         <option value="$PROJECT_DIR$/shop/models.py" />
+        <option value="$PROJECT_DIR$/shop/views.py" />
+        <option value="$PROJECT_DIR$/eShop/urls.py" />
+        <option value="$PROJECT_DIR$/templates/reg_succes.html" />
       </list>
     </option>
   </component>
@@ -667,27 +667,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="77" selection-start="234" selection-end="234" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="240">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eShop/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="62" selection-start="3069" selection-end="3069" vertical-scroll-proportion="0.0" vertical-offset="767" max-vertical-offset="2565">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shop/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="416">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="414">
@@ -702,23 +681,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="20" selection-start="128" selection-end="128" vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="975">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/errors.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="414">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eShop/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="67" selection-start="790" selection-end="790" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="600">
           <folding />
         </state>
       </provider>
@@ -730,9 +695,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/list_pages.html">
+    <entry file="file://$PROJECT_DIR$/templates/order_success.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="14" selection-start="303" selection-end="303" vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="255">
+        <state line="3" column="11" selection-start="112" selection-end="112" vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="135">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/add_order.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="52" selection-start="412" selection-end="412" vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="615">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="20" selection-start="128" selection-end="128" vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="975">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/add_basket.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="35" selection-start="834" selection-end="843" vertical-scroll-proportion="2.5" vertical-offset="420" max-vertical-offset="810">
           <folding />
         </state>
       </provider>
@@ -746,40 +732,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/add_basket.html">
+    <entry file="file://$PROJECT_DIR$/shop/funct.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="35" selection-start="834" selection-end="843" vertical-scroll-proportion="2.5" vertical-offset="420" max-vertical-offset="810">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/order_success.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="11" selection-start="112" selection-end="112" vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="135">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shop/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="152" column="39" selection-start="6816" selection-end="6816" vertical-scroll-proportion="0.0" vertical-offset="1746" max-vertical-offset="2595">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/add_order.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="49" selection-start="905" selection-end="905" vertical-scroll-proportion="-12.5" vertical-offset="120" max-vertical-offset="615">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="885">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shop/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="140" column="39" selection-start="5043" selection-end="5043" vertical-scroll-proportion="0.6376812" vertical-offset="1836" max-vertical-offset="2835">
+        <state line="108" column="30" selection-start="4163" selection-end="4163" vertical-scroll-proportion="0.0" vertical-offset="1515" max-vertical-offset="2910">
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shop/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="416">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shop/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="163" column="33" selection-start="7268" selection-end="7268" vertical-scroll-proportion="0.0" vertical-offset="2211" max-vertical-offset="2910">
+          <folding>
+            <element signature="e#26#133#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eShop/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="60" selection-start="927" selection-end="927" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="645">
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/list_pages.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="14" selection-start="303" selection-end="303" vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="255">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/reg_succes.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="11" selection-start="167" selection-end="167" vertical-scroll-proportion="0.15384616" vertical-offset="0" max-vertical-offset="390">
+          <folding />
         </state>
       </provider>
     </entry>

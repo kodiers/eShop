@@ -37,7 +37,6 @@ def search(request):
         term = request.GET['q']
         goods_list = Goods.objects.filter(Q(title__contains=term )|Q(info__contains=term))
         heading = "Search results"
-        #MainGoodsListView.as_view(queryset=Goods.objects.filter(Q(title__contains=term )|Q(info__contains=term)))
     return render_to_response("main.html", locals(), context_instance=RequestContext(request))
 
 def login_form(request):
@@ -132,18 +131,10 @@ def add_order(request):
                 return HttpResponse(template.render(context))
         elif 'order' in request.POST:
             baskets = Basket.objects.filter(basket_id=request.session.session_key)
-            orderitems = OrderItem()
             order = Orders()
-            for basket in baskets:
-                orderitems.order_sess = basket.basket_id
-                orderitems.goods = basket.item
-                orderitems.quantity = basket.quantity
-                orderitems.total_price_per_goods = basket.sum_total
-                orderitems.order_id = basket.order_number
-                orderitems.partnumber = basket.partnumber
-                orderitems.save()
             if request.user.is_authenticated():
                 order.owner = request.user
+            order.order_id = baskets[0].order_number
             order.total_cost = float(request.POST['total'])
             order.address = request.POST['address']
             order.comments = request.POST['comments']
@@ -154,10 +145,26 @@ def add_order(request):
             order.billing_date_yy = request.POST['billing_date_yy']
             order.billing_cvv = request.POST['billing_cvv']
             order.save()
+            for basket in baskets:
+                orderitems = OrderItem()
+                orderitems.order_id_id = order.order_id
+                orderitems.order_sess = basket.basket_id
+                orderitems.goods = basket.item
+                orderitems.quantity = basket.quantity
+                orderitems.total_price_per_goods = basket.sum_total
+                orderitems.partnumber = basket.partnumber
+                order.orderitem_set.add(orderitems)
+                orderitems.save()
+            order.save()
             template = loader.get_template("order_success.html")
             context = RequestContext(request, {'order_id': order.pk})
             return HttpResponse(template.render(context))
 
+def reg_success(request):
+    """Successful registration"""
+    template = loader.get_template("reg_succes.html")
+    context = RequestContext(request)
+    return HttpResponse(template.render(context))
 
 # Classes
 
