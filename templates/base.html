@@ -48,7 +48,11 @@
             <td width="200">
 {#                <!-- TODO: insert basket script-->#}
                 {% if user.is_authenticated %}
-                    You are logged in as <a href=""> {{ user.username }}</a> <!--TODO: Insert link on user page-->
+                    You are logged in as <a href="/user_profile/"> {{ user.username }}</a> <!--TODO: Insert link on user page-->
+                    <form action='{% url 'user_logout' %}'>
+                    {% csrf_token %}
+                    <input type="submit" value="Logout">
+                    </form>
                 {% else %}
                     <p>Please <a href="/login/">Log in!</a></p>
                 {% endif %}

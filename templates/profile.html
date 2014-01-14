@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ user.username }}</h1>
+<h2>Your orders:</h2>
+<table>
+    <tr>
+        <th>Order number</th>
+        <th>Created date</th>
+        <th>Status</th>
+        <th>Total cost</th>
+        <th>Address</th>
+    </tr>
+    {% for order in orders %}
+    <tr>
+        <td>{{ order.pk }}</td>
+        <td>{{ order.date_created }}</td>
+        <td>{{ order.get_status_display }}</td>
+        <td>{{ order.total_cost }}</td>
+        <td>{{ order.address }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

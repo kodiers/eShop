@@ -166,6 +166,24 @@ def reg_success(request):
     context = RequestContext(request)
     return HttpResponse(template.render(context))
 
+def user_profile(request):
+    """User profile view. Show orders history"""
+    if request.user.is_authenticated():
+        orders = Orders.objects.filter(owner=request.user.pk)
+        template = loader.get_template("profile.html")
+        context = RequestContext(request, {'orders':orders})
+        return HttpResponse(template.render(context))
+    else:
+        templ = loader.get_template("errors.html")
+        error = "You're not authenticated! Please login!"
+        context = RequestContext(request, {'error':error})
+        return HttpResponse(templ.render(context))
+
+def user_logout(request):
+    """User logout view"""
+    logout(request)
+    return HttpResponseRedirect("/")
+
 # Classes
 
 class MainGoodsListView(ListView):
