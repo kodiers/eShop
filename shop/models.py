@@ -116,6 +116,7 @@ class PriceList(models.Model):
     pricelist = models.FileField(upload_to='prices', validators=[funct.import_document_validator])
     import_date = models.DateTimeField(auto_now=True)
     def save(self, *args, **kwargs):
+        # Parsing csv file
         super(PriceList, self).save(*args, **kwargs)
         file_csv = open(self.pricelist.path, 'r')
         reader = csv.reader(file_csv.read().splitlines())

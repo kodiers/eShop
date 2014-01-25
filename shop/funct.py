@@ -3,6 +3,7 @@ import csv
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy
 
+#Function to check csv file( price lists)
 
 # Maps fileds in database to file headers
 HEADERS = {
