@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.db.models.fields.files import ImageField, ImageFieldFile
 from PIL import Image
 import os
+import csv
 import datetime
 from django.contrib.auth.models import User
 import funct
@@ -114,6 +115,25 @@ class PriceList(models.Model):
     name = models.CharField(max_length=255)
     pricelist = models.FileField(upload_to='prices', validators=[funct.import_document_validator])
     import_date = models.DateTimeField(auto_now=True)
+    def save(self, *args, **kwargs):
+        super(PriceList, self).save(*args, **kwargs)
+        file_csv = open(self.pricelist.path, 'r')
+        reader = csv.reader(file_csv.read().splitlines())
+        reader.next()
+        for row in enumerate(reader):
+            category = CategoryGoods.objects.get(title=row[1][0])
+            good = Goods()
+            good.partnumber = row[1][1]
+            good.title = row[1][2]
+            good.good_price = float(row[1][3])
+            good.quantity = int(row[1][4])
+            good.image = row[1][5]
+            good.info = row[1][6]
+            good.modified = datetime.datetime.now()
+            good.category_id = category.pk
+            good.category = category
+            good.save()
+        file_csv.close()
 
 class PriceListAdmin(admin.ModelAdmin):
     list_display = ('name', 'pricelist', 'import_date')

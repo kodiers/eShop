@@ -6,13 +6,14 @@ from django.utils.translation import ugettext_lazy
 
 # Maps fileds in database to file headers
 HEADERS = {
+    'category': {'field':'category', 'required':True},
     'partnumber': {'field':'partnumber', 'required':True},
     'title': {'field':'title', 'required':True},
     'good_price':{'field':'good_price', 'required':True},
     'quantity':{'field':'quantity', 'required':False},
     'image':{'field':'image', 'required':False},
     'info':{'field':'info', 'required':False},
-    'modified':{'field':'modified', 'required':False},
+    #'modified':{'field':'modified', 'required':False},
 }
 
 
