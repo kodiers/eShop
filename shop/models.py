@@ -9,6 +9,7 @@ import datetime
 from django.contrib.auth.models import User
 import funct
 from django.core.urlresolvers import reverse
+import eShop.settings
 
 # Create your models here.
 class CategoryGoods(models.Model):

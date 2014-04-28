@@ -1,0 +1,3 @@
+category, partnumber, title, good_price, quantity, image, info
+Hardware, 123123, Ethernet Intel, 25.1, 150, ,Ethernet Intel E1000 10/100MB
+Hardware, 123123, SAS RAID, 250, 10, ,SAS RAID LSI MegaRaid 6GB
